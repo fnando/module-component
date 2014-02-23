@@ -60,7 +60,7 @@ Now, you can define your HTML. Just create a element with the attribute `data-co
 
 Notice that the component's name is lowercased dash/underscore-separated. So, you can define names like `hello`, `hello-there` or `hello_there`.
 
-Now, just reload the page and you're done! The current must be displayed! You can check this and other examples on the [examples directory](https://github.com/fnando/module-component/tree/master/test).
+Now, just reload the page and you're done! The current must be displayed! You can check this and other examples on the [examples directory](https://github.com/fnando/module-component/tree/master/examples).
 
 ## Maintainer
 
