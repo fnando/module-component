@@ -6,7 +6,7 @@ Define auto-discoverable HTML UI components.
 
 Load `module.js`, `module-component.js` and `jquery.js`.
 
-```javascript
+```html
 <script src="jquery.js"></script>
 <script src="module.js"></script>
 <script src="module-component.js"></script>
