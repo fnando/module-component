@@ -1,0 +1,17 @@
+{
+  "name": "module-component",
+  "version": "0.1.0",
+  "main": ["component.js"],
+  "ignore": [
+    "test",
+    "report",
+    ".gitignore"
+  ],
+  "devDependencies": {
+    "jquery": "~2.1.0",
+    "module": "~1.0.0"
+  },
+  "dependencies": {
+    "qunit": "~1.14.0"
+  }
+}

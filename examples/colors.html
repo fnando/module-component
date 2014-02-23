@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    html, body {
+      width: 100%;
+      height: 100%;
+    }
+
+    html {
+      display: table;
+    }
+
+    body {
+      display: table-cell;
+      font-family: monospace;
+      font-size: 160px;
+      text-align: center;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+  <div
+    data-components="alternate-colors auto-update"
+    data-update-interval="1000"
+    data-colors="red, blue, green, orange, fuchsia, yellow, black"
+  ></div>
+
+  <script src="../vendor/jquery/dist/jquery.js"></script>
+  <script src="../vendor/module/module.js"></script>
+  <script src="../component.js"></script>
+  <script src="ui/auto_update.js"></script>
+  <script>
+    Module("UI.AlternateColors", function(AlternateColors){
+      AlternateColors.fn.initialize = function(element) {
+        this.element = element;
+        this.colors = element.data("colors").split(/, */);
+      };
+
+      AlternateColors.fn.update = function() {
+        var date = new Date();
+        var index = date.getSeconds() % this.colors.length;
+        var color = this.colors[index];
+
+        this.element
+          .css("color", color)
+          .text(color)
+        ;
+      };
+    });
+
+    Component.setup(document.body, UI);
+  </script>
+</body>
+</html>
