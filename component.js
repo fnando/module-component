@@ -24,6 +24,7 @@ Module("Component", function(Component){
 
     return {
         element: element
+      , data: this.extractData(element)
       , constructors: this.getComponentConstructors(element)
     };
   };
@@ -35,7 +36,7 @@ Module("Component", function(Component){
 
   Component.fn.createComponent = function(index, info) {
     info.constructors.forEach(function(constructor){
-      var component = constructor(info.element);
+      var component = constructor(info.element, info.data);
       var cache = info.element.data("_components") || [];
 
       cache.push(component);
@@ -60,5 +61,17 @@ Module("Component", function(Component){
     });
 
     return namespace[0].toUpperCase() + namespace.substr(1);
+  };
+
+  Component.fn.extractData = function(element) {
+    var attrs = [].slice.call(element.get(0).attributes, 0);
+
+    return attrs
+      .filter(function(attr){ return attr.name.match(/^data-(?!components?).+$/); })
+      .map(function(attr){ return attr.name.split("data-")[1]; })
+      .reduce(function(dataset, attr){
+        dataset[attr] = element.data(attr);
+        return dataset;
+      }, {})
   };
 });

@@ -25,7 +25,7 @@ Create your application and initialize the components discovery.
 ```javascript
 Module("MyApp.Application", function(Application){
   Application.fn.initialize = function() {
-    Module.run("Component.setup", [document.body, Module.fetch("MyApp.UI")]);
+    Component.setup(document.body, MyApp.UI);
   };
 });
 ```
@@ -36,10 +36,15 @@ Now, let's create a simple component which displays the current time.
 
 ```javascript
 Module("MyApp.UI.Clock", function(Clock){
-  Clock.fn.initialize = function(container) {
+  Clock.fn.initialize = function(container, dataset) {
     // The container object is always passed when
     // initializing the component.
     this.container = container;
+
+    // All data attributes are returned as the dataset.
+    // This will use the jQuery.fn.data function, which
+    // means that some serialization is performed.
+    this.dataset = dataset;
   };
 
   // The `setup` function is called when initializing the component.
@@ -60,7 +65,7 @@ Now, you can define your HTML. Just create a element with the attribute `data-co
 
 Notice that the component's name is lowercased dash/underscore-separated. So, you can define names like `hello`, `hello-there` or `hello_there`.
 
-Now, just reload the page and you're done! The current must be displayed! You can check this and other examples on the [examples directory](https://github.com/fnando/module-component/tree/master/examples).
+Now, just reload the page and you're done! The current hour must be displayed! You can check this and other examples on the [examples directory](https://github.com/fnando/module-component/tree/master/examples).
 
 ## Maintainer
 

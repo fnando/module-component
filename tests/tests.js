@@ -3,9 +3,10 @@
 
   // Color component
   Module("UI.Color", function(Color){
-    Color.fn.initialize = function(element) {
+    Color.fn.initialize = function(element, data) {
       this.element = element;
       this.color = element.data("color");
+      this.data = data;
     };
 
     Color.fn.setup = function() {
@@ -68,5 +69,21 @@
     div.attr({"data-component": "no-setup"});
     Component.setup(output, UI);
     ok(true);
+  });
+
+  test("return all data attributes but data-component", function(){
+    div.attr({
+        "data-component": "color"
+      , "data-color": "red"
+      , "data-interval": 5
+    });
+
+    Component.setup(output, UI);
+
+    var dataset = div.data("_components")[0].data;
+
+    equal(Object.keys(dataset).length, 2);
+    equal(dataset.color, "red");
+    equal(dataset.interval, 5);
   });
 })();
