@@ -32,6 +32,17 @@
     };
   });
 
+  // Module with multiple words
+  Module("UI.SomeNiceModule", function(SomeNiceModule){
+    SomeNiceModule.fn.initialize = function(element) {
+      this.element = element;
+    };
+
+    SomeNiceModule.fn.setup = function() {
+      this.element.text("Nice module is nice!");
+    };
+  });
+
   module("module-component.js", {setup: function(){
     output = $("#qunit-fixture");
     div = $("<div/>").appendTo(output);
@@ -50,6 +61,13 @@
 
     equal(div.css("color"), "rgb(255, 0, 0)");
     equal(div.text(), "Lorem ipsum");
+  });
+
+  test("initialize component using multiple words", function(){
+    div.attr({"data-component": "some-nice-module"});
+    Component.setup(output, UI);
+
+    equal(div.text(), "Nice module is nice!");
   });
 
   test("caches initialized components", function(){

@@ -56,7 +56,7 @@ Module("Component", function(Component){
   };
 
   Component.fn.convertToNameSpace = function(name) {
-    var namespace = name.replace(/([-_].)/, function(match, group){
+    var namespace = name.replace(/([-_].)/g, function(match, group){
       return group.substr(1).toUpperCase();
     });
 
